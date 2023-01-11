@@ -17,18 +17,7 @@ const PORT = process.env.port || 3000;
 http.listen(PORT, () => {
   console.log(`listening on port: ${PORT}`);
 });
-app.get("/", (req, res) => {
-  User.find({}, function (err, chats) {
-    if (err) {
-      console.log("error in fetching the database");
-      return;
-    }
-    return res.render("home", {
-      title: "My chat App",
-      chat_list: chats,
-    });
-  });
-});
+app.use("/", require("./routes"));
 
 //socket
 const io = require("socket.io")(http);
